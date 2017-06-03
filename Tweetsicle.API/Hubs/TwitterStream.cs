@@ -13,11 +13,12 @@ namespace SignalRTwitterDemo.Hubs
         private static readonly IHubContext _context = GlobalHost.ConnectionManager.GetHubContext<TwitterHub>();
         public static async Task StartStream(string query, CancellationToken token)
         {
-            const string CONSUMER_KEY = "CONSUMER_KEY";
-            const string CONSUMER_SECRET = "CONSUMER_SECRET";
-            const string ACCESS_TOKEN = "ACCESS_TOKEN";
-            const string ACCESS_TOKEN_SECRET = "ACCESS_TOKEN_SECRET";
-            Auth.SetUserCredentials(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET);
+
+            Auth.SetUserCredentials(
+                TwitterCredentials.CONSUMER_KEY, 
+                TwitterCredentials.CONSUMER_SECRET, 
+                TwitterCredentials.ACCESS_TOKEN, 
+                TwitterCredentials.ACCESS_TOKEN_SECRET);
             if (_streams.ContainsKey(query))
             {
                 _streams[query].ResumeStream();
